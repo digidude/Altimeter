@@ -6,3 +6,4 @@
 lib/wifi_provision/provision_html_generated.h
 .DS_Store
 managed_components/
+site/

@@ -44,7 +44,10 @@ sdkconfig.defaults       small config tweaks (main task stack size,
 platformio.ini           board/framework config — also sets
                          board_build.partitions for the OTA-ready
                          two-slot layout
-PROJECT.md               milestone tracker / definition of done
+project/                 milestone tracker / definition of done, one
+                         file per milestone — see project/README.md
+docs/                    end-user documentation (MkDocs) — provisioning
+                         and factory-reset instructions
 ```
 
 `include/`, `test/`, `.vscode/`, `.gitignore` are the standard
@@ -104,7 +107,7 @@ overflow warnings, don't worry about it.
    theory that a mid-session drop is transient but a boot-time failure
    might mean the password's wrong or the network's gone.
 
-## Testing against Milestone 1 (see PROJECT.md)
+## Testing against Milestone 1 (see project/01-connectivity.md)
 
 Run these in order, on real hardware, before touching any app feature:
 
@@ -122,10 +125,10 @@ Run these in order, on real hardware, before touching any app feature:
    — confirm it gives up after the bounded retries and drops back into
    AP/captive portal instead of hanging silently.
 
-Only check items off in `PROJECT.md` once you've actually run these —
+Only check items off in the milestone docs (`project/`) once you've actually run these —
 not once the code looks right.
 
-## Known rough edges (tracked in PROJECT.md)
+## Known rough edges (tracked in project/known-issues.md)
 
 - Saving credentials always triggers a full reboot.
 - ~~No mDNS/hostname yet.~~ — added: reachable as `http://<name>.local`,
