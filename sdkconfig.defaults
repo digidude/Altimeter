@@ -1,0 +1,24 @@
+# Starting defaults — tune with `pio run -t menuconfig` as needed.
+# The provisioning task (httpd + DNS hijack + wifi mgmt) fits in the
+# default main task stack, but bump it a little for headroom.
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+
+# The board's flash chip is physically 16MB (confirmed via
+# `esptool.py flash_id`), but PlatformIO's board manifest for
+# esp32-c6-devkitc-1 only officially supports up to 8MB. Without this,
+# a freshly generated sdkconfig defaults to CONFIG_ESPTOOLPY_FLASHSIZE
+# of 2MB — wrong on every count and the source of the recurring
+# "Expected 8MB, found ...MB" warnings during build/erase.
+CONFIG_ESPTOOLPY_FLASHSIZE_8MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="8MB"
+
+# OTA support: with two app slots (see platformio.ini's
+# board_build.partitions), this lets the bootloader auto-revert to the
+# previous slot if a newly-flashed image never confirms itself healthy
+# (esp_ota_mark_app_valid_cancel_rollback) before its next reboot. Only
+# takes effect for images written through the actual esp_ota_ops update
+# flow, not this plain build/upload — no update client exists yet, so
+# there's nothing to roll back to right now. Whatever OTA client gets
+# added later still needs to call the confirm function itself, or every
+# future update would revert on its second boot.
+CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=y

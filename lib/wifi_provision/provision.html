@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Device Setup</title>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            width: 100%;
+            overflow-x: hidden
+        }
+
+        body {
+            font-family: sans-serif;
+            max-width: 380px;
+            margin: 40px auto;
+            padding: 0 16px
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0 16px;
+            border: 1.5px solid #767676;
+            border-radius: 4px
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 4px
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #666;
+            margin: -12px 0 16px
+        }
+
+        .showpw {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            margin: -10px 0 16px
+        }
+
+        .showpw input {
+            width: auto;
+            margin: 0;
+            border: none
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Connect this device to WiFi</h2>
+    <form method="POST" action="/save">
+        <label>Network name (SSID)</label>
+        <input list="ssids" name="ssid" id="ssid" maxlength="31" required autocapitalize="off" autocorrect="off"
+            spellcheck="false">
+        <datalist id="ssids"></datalist>
+        <div class="hint" id="status">Scanning for networks&hellip;</div>
+        <label>Password</label>
+        <input name="password" type="password" id="pw" maxlength="63" autocapitalize="off" autocorrect="off"
+            spellcheck="false">
+        <label class="showpw"><input type="checkbox" id="showpw"> Show password</label>
+        <label>Device name</label>
+        <input name="hostname" id="hostname" maxlength="32" value="altimeter" pattern="[A-Za-z0-9-]+"
+            autocapitalize="off" autocorrect="off" spellcheck="false">
+        <div class="hint">Reachable at http://&lt;name&gt;.local &mdash; letters, numbers, hyphens only</div>
+        <label>Timezone</label>
+        <select name="tz">
+            <option value="UTC" selected>UTC</option>
+            <option value="PST8PDT,M3.2.0,M11.1.0">US Pacific</option>
+            <option value="MST7MDT,M3.2.0,M11.1.0">US Mountain</option>
+            <option value="CST6CDT,M3.2.0,M11.1.0">US Central</option>
+            <option value="EST5EDT,M3.2.0,M11.1.0">US Eastern</option>
+            <option value="GMT0BST,M3.5.0/1,M10.5.0">UK</option>
+            <option value="CET-1CEST,M3.5.0,M10.5.0/3">Central Europe</option>
+        </select>
+        <button type="submit">Save &amp; Connect</button>
+    </form>
+    <script>
+        fetch('/scan').then(function (r) { return r.json(); }).then(function (list) {
+            var dl = document.getElementById('ssids');
+            var status = document.getElementById('status');
+            if (list.length === 0) { status.textContent = 'No networks found - enter manually'; return; }
+            list.forEach(function (ssid) {
+                var opt = document.createElement('option');
+                opt.value = ssid;
+                dl.appendChild(opt);
+            });
+            status.textContent = 'Found ' + list.length + ' network(s) - pick one or type your own';
+        }).catch(function () {
+            document.getElementById('status').textContent = 'Scan failed - enter manually';
+        });
+        document.getElementById('showpw').addEventListener('change', function () {
+            document.getElementById('pw').type = this.checked ? 'text' : 'password';
+        });
+    </script>
+</body>
+
+</html>
