@@ -2,12 +2,11 @@
 
 # Milestone 1b — OTA-ready partition table
 
-Scope: switched from a single 1MB `factory` app partition to a two-slot
-OTA layout (`ota_0`/`ota_1`, 1700K each, plus `otadata`) via
-`board_build.partitions = partitions_two_ota_large.csv` in
-`platformio.ini` (framework-bundled CSV, no project-local file needed),
-and `CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=y` in `sdkconfig.defaults`.
-This is groundwork only — no actual OTA update client exists yet.
+## Scope: 
+
+Enable Over-The-Air (OTA) updates -- Switched from a single 1MB `factory`  app partition to a two-slot OTA layout (`ota_0`/`ota_1`, 1700K each, plus `otadata`) via `board_build.partitions = partitions_two_ota_large.csv` in `platformio.ini` (framework-bundled CSV, no project-local file needed), and `CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=y` in `sdkconfig.defaults`. This is groundwork only — no actual OTA update client exists yet.
+
+Definition of done — all of these need an actual test, not a read-through:
 
 - [x] Full chip erase + fresh build/upload boots correctly from `ota_0`
       (verified via boot log: partition table shows nvs/otadata/

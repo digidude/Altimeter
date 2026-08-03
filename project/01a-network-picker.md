@@ -2,12 +2,17 @@
 
 # Milestone 1a — Network picker UX
 
-Scope: the setup page scans for nearby networks (device runs SoftAP +
+Scope: 
+
+1) the **Setup Page** scans for nearby networks (device runs SoftAP +
 STA together — `WIFI_MODE_APSTA`) and offers them as a dropdown, since
 the exact SSID (case-sensitive) isn't always obvious to whoever's
-provisioning the device. Still a free-text field underneath, so a
-hidden or out-of-range network can be typed by hand. Also adds a "Show
-password" toggle on the password field.
+provisioning the device. 
+
+2) Still a free-text field underneath, so a hidden or out-of-range network
+can be typed by hand. Also adds a "Show password" toggle on the password field.
+
+Definition of done — all of these need an actual test, not a read-through:
 
 - [x] Setup page shows "Scanning for networks…" on load, then populates
       a dropdown/datalist of nearby SSIDs

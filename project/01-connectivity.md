@@ -2,11 +2,16 @@
 
 # Milestone 1 — Connectivity (blocks all app features)
 
-Scope: device with no saved credentials boots into a SoftAP + captive
-portal, accepts SSID/password from a phone or laptop, saves them to NVS,
-connects, and reconnects reliably afterward. This is implemented in
-`lib/wifi_provision/` (its own ESP-IDF component — see README.md
-Layout).
+Scope: device with no saved credentials 
+
+- boots into a SoftAP + captive portal
+- accepts SSID/password from a phone or laptop
+- saves them to NVS (non-volidal storage)
+- connects to wifi
+- reconnects reliably if there is signal loss 
+  
+This is all implemented in `lib/wifi_provision/` 
+(its own ESP-IDF component — see README.md Layout).
 
 Definition of done — all of these need an actual test, not a read-through:
 

@@ -1,7 +1,19 @@
 # Getting Started
 
-Follow these steps to connect a new (or [factory-reset](factory-reset.md))
-device to your WiFi network.
+There is no ESP Web Tools page for this project yet. It's way to early to
+support any users who are not developers.
+
+## 0. Download the binaries
+
+You'll need the following files
+
+- bootloader.bin
+- partition-table.bin
+- firmware.bin
+
+Once you have these file on your ESP32... Follow these steps to connect
+a new (or [factory-reset](factory-reset.md)) device to your WiFi network.
+
 
 ## 1. Power on the device
 
