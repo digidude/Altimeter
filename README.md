@@ -1,7 +1,17 @@
 # Altimeter — WiFi Provisioning (Milestone 1)
 
-Native ESP-IDF (no Arduino layer), built through PlatformIO. Board:
-`esp32-c6-devkitc-1`.
+Native ESP-IDF (no Arduino layer), built through PlatformIO.
+Board: `esp32-c6-devkitc-1`
+
+WARNING: AI Slop Coded using Claude. This is a slop project to learn
+Claude and ESP32's. Building is small incremental blocks of working 
+functionality.
+
+Fork and thrash on your own, or wait around till I add more code.
+
+Open to suggestions, enhanements, and bug reports
+
+---
 
 ## Layout
 
@@ -53,7 +63,9 @@ docs/                    end-user documentation (MkDocs) — provisioning
 `include/`, `test/`, `.vscode/`, `.gitignore` are the standard
 PlatformIO scaffold — untouched.
 
-## Build / flash
+---
+
+## Build / Flash
 
 ```
 pio run                       # build
@@ -85,6 +97,8 @@ from the earlier stub build, the stack-size bump in `sdkconfig.defaults`
 won't apply until you either delete that generated file or run
 `pio run -t menuconfig` and set it by hand. If you don't hit stack
 overflow warnings, don't worry about it.
+
+---
 
 ## How it works
 
@@ -133,4 +147,6 @@ not once the code looks right.
 - Saving credentials always triggers a full reboot.
 - ~~No mDNS/hostname yet.~~ — added: reachable as `http://<name>.local`,
   hostname defaults to `altimeter`, user-configurable via the captive
-  portal form (stored in NVS alongside SSID/password/timezone).
+  portal form (stored in NVS alongside SSID/password/timezone). Ping 
+  `http://altimeter.local` will return the IP address. Doesn't not (yet?)
+  have an httpd service running full time. Only during provisioning.
