@@ -46,10 +46,10 @@ http://192.168.4.1
 - **Network name (SSID)** — pick your WiFi network from the list, or
   type it manually if it's hidden or out of range
 - **Password**
-- **Device name** — defaults to `altimeter`. Once connected, the
-  device is reachable at `http://<device name>.local`. Letters,
-  numbers, and hyphens only.
-- **Timezone**
+- **Device name** — defaults to `altimeter`. Letters,
+  numbers, and hyphens only. Once connected, the
+  device can be pinged at `http://<device name>.local`. 
+- **Timezone** - Pick from the list or enter desired local TZ
 
 Tap **Save & Connect**.
 
@@ -59,9 +59,11 @@ The device reboots and joins your network. Watch the status LED:
 
 | LED | Meaning |
 |---|---|
-| Blinking amber (fast) | Connecting |
+| Solid Amber (steady) | Ready, un-provisioned |
+| Blinking amber (fast) | Connecting to WiFi |
 | Solid green | Connected |
 | Blinking amber (slow) | Couldn't connect — double-check the password. The device falls back to the `ESP32-Setup-XXXX` setup network so you can try again. |
+| Red (solid) | Lost Connection - Will attempt to reconnect |
 
 Once the LED is solid green, the device is on your network and
 reachable at `http://<device name>.local`.
